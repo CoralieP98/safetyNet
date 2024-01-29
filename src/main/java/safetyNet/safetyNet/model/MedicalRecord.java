@@ -8,7 +8,7 @@ public class MedicalRecord {
 
     private String firstName;
     private String lastName;
-    private DateFormat birthdate;
+    private String birthdate;
     List<String> medications;
     List<String> allergies;
 
@@ -30,11 +30,7 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
-    public DateFormat getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(DateFormat birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 

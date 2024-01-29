@@ -7,7 +7,7 @@ public class Person {
     private String lastName;
     private String address;
     private String city;
-    private Integer zip;
+    private String zip;
     private String phone;
     private String email;
 
@@ -45,11 +45,11 @@ public Person(){}
         this.city = city;
     }
 
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(Integer zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 

@@ -1,15 +1,23 @@
 package safetyNet.safetyNet.model;
 
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+@Component
 public class Data {
 
     List<Person> persons;
-    List<FireStation> fireStations;
+    List<FireStation> firestations;
 
-    List<MedicalRecord>medicalRecords;
+    List<MedicalRecord>medicalrecords;
 
     public Data(){}
+
+    public Data(List<Person> persons, List<FireStation> firestations, List<MedicalRecord> medicalrecords) {
+        this.persons = persons;
+        this.firestations = firestations;
+        this.medicalrecords = medicalrecords;
+    }
 
     public List<Person> getPersons() {
         return persons;
@@ -19,19 +27,19 @@ public class Data {
         this.persons = persons;
     }
 
-    public List<FireStation> getFireStations() {
-        return fireStations;
+    public List<FireStation> getFirestations() {
+        return firestations;
     }
 
-    public void setFireStations(List<FireStation> fireStations) {
-        this.fireStations = fireStations;
+    public void setFirestations(List<FireStation> firestations) {
+        this.firestations = firestations;
     }
 
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
+    public List<MedicalRecord> getMedicalrecords() {
+        return medicalrecords;
     }
 
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
+    public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
+        this.medicalrecords = medicalrecords;
     }
 }

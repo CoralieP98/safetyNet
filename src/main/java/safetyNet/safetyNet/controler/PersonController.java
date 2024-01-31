@@ -27,6 +27,8 @@ public class PersonController {
         return personService.phoneAlert(station);
     }*/
 
+    //meh
+
     @GetMapping("phoneAlert")
     public List<String> phoneAlert(@RequestParam(name="firestation") String station){
         return personService.phoneAlert(station);

@@ -30,8 +30,13 @@ public class PersonRepository {
         return emails;
     }
 
+    public List<Person> personList(){
+        List<Person> personList = dataHandler.getData().getPersons();
+        return personList;
+    }
 
-    public List<String> listAdressPerson(){
+
+    /*public List<String> listAdressPerson(){
 //        List<FireStation> firestations = dataHandler.getData().getFirestations();
         List<Person> persons = dataHandler.getData().getPersons();
         List<Person> adresses = persons.stream().filter(adress -> adress.getAddress() != null).collect(Collectors.toList());
@@ -41,5 +46,5 @@ public class PersonRepository {
             adressList.add(person.getAddress());
         }
         return adressList;
-    }
+    }*/
 }

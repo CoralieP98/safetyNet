@@ -1,8 +1,6 @@
 package safetyNet.safetyNet.controler;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import safetyNet.safetyNet.model.Person;
 import safetyNet.safetyNet.service.PersonService;
 
@@ -24,8 +22,18 @@ public class PersonController {
         return personService.getEmails();
     }
 
-    @GetMapping("getAddressPerson")
+    /*@GetMapping("phoneAlert/{firestation}")
+    public List<String> phoneAlert(@PathVariable("station") String station){
+        return personService.phoneAlert(station);
+    }*/
+
+    @GetMapping("phoneAlert")
+    public List<String> phoneAlert(@RequestParam(name="firestation") String station){
+        return personService.phoneAlert(station);
+    }
+
+    /*@GetMapping("getAddressPerson")
     public List<String> listAdressPerson(){
         return personService.listAdressPerson();
-    }
+    }*/
 }

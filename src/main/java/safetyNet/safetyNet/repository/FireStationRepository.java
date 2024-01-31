@@ -3,6 +3,7 @@ package safetyNet.safetyNet.repository;
 import org.springframework.stereotype.Repository;
 import safetyNet.safetyNet.Config.DataHandler;
 import safetyNet.safetyNet.model.FireStation;
+import safetyNet.safetyNet.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,12 @@ public class FireStationRepository {
         this.dataHandler = dataHandler;
     }
 
-    public List<String> listAddressFireStation(){
+    public List<FireStation> fireStationList(){
+        List<FireStation> fireStationList = dataHandler.getData().getFirestations();
+        return fireStationList;
+    }
+
+    /*public List<String> listAddressFireStation(){
         List<FireStation> fireStations = dataHandler.getData().getFirestations();
         List<FireStation> adresses = fireStations.stream().filter(adress -> adress.getAddress() != null).collect(Collectors.toList());
         List<String> fireStationList = new ArrayList<>();
@@ -26,5 +32,5 @@ public class FireStationRepository {
             fireStationList.add(fireStation.getAddress());
         }
         return fireStationList;
-    }
+    }*/
 }

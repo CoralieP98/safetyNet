@@ -20,6 +20,12 @@ public class PersonController {
 
     @GetMapping("getEmail")
     public List<String> getEmails(){
+
         return personService.getEmails();
+    }
+
+    @GetMapping("getAddressPerson")
+    public List<String> listAdressPerson(){
+        return personService.listAdressPerson();
     }
 }

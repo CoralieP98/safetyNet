@@ -18,4 +18,8 @@ public class PersonService {
     public List<String> getEmails(){
         return personRepository.getEmails();
     }
+
+    public List<String> listAdressPerson(){
+        return personRepository.listAdressPerson();
+    }
 }

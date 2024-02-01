@@ -30,6 +30,10 @@ public class MedicalRecord {
         this.lastName = lastName;
     }
 
+    public String getBirthdate() {
+        return birthdate;
+    }
+
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }

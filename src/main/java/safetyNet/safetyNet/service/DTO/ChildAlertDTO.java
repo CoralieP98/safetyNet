@@ -9,13 +9,13 @@ public class ChildAlertDTO {
     private String lastName;
     private String age;
 
-    List<String> sharingHouseHoldWith;
+    List<String> sharingHouseholdWith;
 
-    public ChildAlertDTO(String firstName, String lastName, String age, List<String> sharingHouseHoldWith) {
+    public ChildAlertDTO(String firstName, String lastName, String age, List<String> sharingHouseholdWith) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.sharingHouseHoldWith = sharingHouseHoldWith;
+        this.sharingHouseholdWith = sharingHouseholdWith;
     }
 
     public String getFirstName() {
@@ -42,11 +42,11 @@ public class ChildAlertDTO {
         this.age = age;
     }
 
-    public List<String> getSharingHouseHoldWith() {
-        return sharingHouseHoldWith;
+    public List<String> getSharingHouseholdWith() {
+        return sharingHouseholdWith;
     }
 
-    public void setSharingHouseHoldWith(List<String> sharingHouseHoldWith) {
-        this.sharingHouseHoldWith = sharingHouseHoldWith;
+    public void setSharingHouseholdWith(List<String> sharingHouseholdWith) {
+        this.sharingHouseholdWith = sharingHouseholdWith;
     }
 }

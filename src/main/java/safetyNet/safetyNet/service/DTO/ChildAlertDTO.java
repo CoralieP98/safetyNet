@@ -1,7 +1,10 @@
 package safetyNet.safetyNet.service.DTO;
 
-import java.util.List;
+import org.springframework.stereotype.Component;
+import safetyNet.safetyNet.model.Person;
 
+import java.util.List;
+@Component
 public class ChildAlertDTO {
 
     private String firstName;
@@ -9,9 +12,12 @@ public class ChildAlertDTO {
     private String lastName;
     private String age;
 
-    List<String> sharingHouseholdWith;
+    List<Person> sharingHouseholdWith;
 
-    public ChildAlertDTO(String firstName, String lastName, String age, List<String> sharingHouseholdWith) {
+    public ChildAlertDTO() {
+    }
+
+    public ChildAlertDTO(String firstName, String lastName, String age, List<Person> sharingHouseholdWith) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -42,11 +48,11 @@ public class ChildAlertDTO {
         this.age = age;
     }
 
-    public List<String> getSharingHouseholdWith() {
+    public List<Person> getSharingHouseholdWith() {
         return sharingHouseholdWith;
     }
 
-    public void setSharingHouseholdWith(List<String> sharingHouseholdWith) {
+    public void setSharingHouseholdWith(List<Person> sharingHouseholdWith) {
         this.sharingHouseholdWith = sharingHouseholdWith;
     }
 }

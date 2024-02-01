@@ -5,13 +5,19 @@ import safetyNet.safetyNet.model.MedicalRecord;
 import safetyNet.safetyNet.model.Person;
 import safetyNet.safetyNet.repository.MedicalRecordRepository;
 import safetyNet.safetyNet.repository.PersonRepository;
+import safetyNet.safetyNet.service.DTO.ChildAlertDTO;
 
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ChildAlertService {
+
+    public ChildAlertDTO childAlertDTO= new ChildAlertDTO();
 
     public final MedicalRecordRepository medicalRecordRepository;
 
@@ -23,34 +29,47 @@ public class ChildAlertService {
         this.personRepository = personRepository;
     }
 
-    public List<String> calculateAge(){
-//        medicalRecordRepository.birthdateList();
-        List<Person> personList= personRepository.personList();
-        List<MedicalRecord> medicalRecordList = medicalRecordRepository.medicalRecordList();
+    public Integer calculateAge(String birthdate){
+
         LocalDate curDate = LocalDate.now();
         DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter formatout = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        for (Person person:personList) {
-            for (MedicalRecord medicalRecord:medicalRecordList) {
+       LocalDate date = LocalDate.parse(birthdate, formatIn);
+        date.format(formatout);
 
-
-            }
-
-        }
+       return Period.between(date,curDate).getYears();
     }
 
+    public List<ChildAlertDTO> childAlertList(String address) throws ParseException {
+        List<ChildAlertDTO> childList =new ArrayList<>();
+        List<MedicalRecord> medicalRecordList = medicalRecordRepository.medicalRecordList();
+        List<Person> personList = personRepository.personList();
+
+        for (Person person : personList){
+            for(MedicalRecord medicalRecord : medicalRecordList){
+                if (person.getFirstName().equals(medicalRecord.getFirstName())
+                        && person.getLastName().equals(medicalRecord.getLastName())
+                        && person.getAddress().equals(address)){
+                    Integer age = calculateAge(medicalRecord.getBirthdate());
+                    if (age <= 18){
+                        List<Person> sharingHouseholdWith =new ArrayList<>();
+                        for (Person people : personList){
+                            if (person.getAddress().equals(people.getAddress())){
+                                sharingHouseholdWith.add(people);
+                            }
+                        }
+                        ChildAlertDTO childAlertDTO = new ChildAlertDTO();
+                        childAlertDTO.setAge(age.toString());
+                        childAlertDTO.setFirstName(person.getFirstName());
+                        childAlertDTO.setLastName(person.getLastName());
+                        childAlertDTO.setSharingHouseholdWith(sharingHouseholdWith);
+                        childList.add(childAlertDTO);
+                    }
+                }
+            }
+        }
+        return childList;
+    }
 
 }
 
-//    Calendar c = Calendar.getInstance ();
-//c.setLenient (false);
-//        c.setTime (new Date (maintenant.getTimeInMillis () - cal.getTimeInMillis ()));
-
-
-
-/*private int calculAge(int jour, int mois, int annee){
-        GregorianCalendar now= new GregorianCalendar();
-        GregorianCalendar d = new GregorianCalendar(annee,mois,jour);
-        int age = now.get(Calendar.YEAR)-d.get(Calendar.YEAR);
-        return age;
-        }*/

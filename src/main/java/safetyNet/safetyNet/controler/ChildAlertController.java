@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import safetyNet.safetyNet.service.ChildAlertService;
+import safetyNet.safetyNet.service.DTO.ChildAlertDTO;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class ChildAlertController {
     }
 
     @GetMapping("childAlert")
-    public List<String> childAlert(@RequestParam(name="address") String address){
+    public List<ChildAlertDTO> childAlert(@RequestParam(name="address") String address) throws ParseException {
         return childAlertService.childAlertList(address);
     }
 }

@@ -18,7 +18,7 @@ public class MedicalRecordRepository {
 
     public List<MedicalRecord> medicalRecordList(){
         List<MedicalRecord> medicalRecords = dataHandler.getData().getMedicalrecords();
-        return medicalRecordList();
+        return medicalRecords;
     }
 
     public List<String> birthdateList(){

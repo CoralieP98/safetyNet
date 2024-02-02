@@ -2,6 +2,7 @@ package safetyNet.safetyNet.controler;
 
 import org.springframework.web.bind.annotation.*;
 import safetyNet.safetyNet.service.DTO.PersonByStationDTO;
+import safetyNet.safetyNet.service.DTO.PersonInfoDTO;
 import safetyNet.safetyNet.service.DTO.StationNumberDTO;
 import safetyNet.safetyNet.service.PersonService;
 
@@ -44,6 +45,11 @@ public class PersonController {
     @GetMapping("firestation")
     public StationNumberDTO  personByStation(@RequestParam(name="stationNumber") String station){
         return personService.stationNumber(station);
+    }
+
+    @GetMapping("personInfo")
+    public List<PersonInfoDTO> personInfoList (@RequestParam(name="firstName")String firstName, @RequestParam(name="lastName") String lastName){
+        return personService.personInfoList(lastName);
     }
 
     /*@GetMapping("getAddressPerson")

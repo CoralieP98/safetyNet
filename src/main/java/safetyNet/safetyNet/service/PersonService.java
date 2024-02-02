@@ -8,6 +8,7 @@ import safetyNet.safetyNet.repository.FireStationRepository;
 import safetyNet.safetyNet.repository.MedicalRecordRepository;
 import safetyNet.safetyNet.repository.PersonRepository;
 import safetyNet.safetyNet.service.DTO.PersonByStationDTO;
+import safetyNet.safetyNet.service.DTO.PersonInfoDTO;
 import safetyNet.safetyNet.service.DTO.StationNumberDTO;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class PersonService {
 
     public final StationNumberDTO stationNumberDTO;
+    public final PersonInfoDTO personInfoDTO;
 
     public final FireStationRepository fireStationRepository;
 
@@ -26,8 +28,9 @@ public class PersonService {
     public final ChildAlertService childAlertService;
     public final MedicalRecordRepository medicalRecordRepository;
 
-    public PersonService(StationNumberDTO stationNumberDTO, FireStationRepository fireStationRepository, PersonRepository personRepository, ChildAlertService childAlertService, MedicalRecordRepository medicalRecordRepository) {
+    public PersonService(StationNumberDTO stationNumberDTO, PersonInfoDTO personInfoDTO, FireStationRepository fireStationRepository, PersonRepository personRepository, ChildAlertService childAlertService, MedicalRecordRepository medicalRecordRepository) {
         this.stationNumberDTO = stationNumberDTO;
+        this.personInfoDTO = personInfoDTO;
         this.fireStationRepository = fireStationRepository;
         this.personRepository = personRepository;
         this.childAlertService = childAlertService;
@@ -92,6 +95,29 @@ public class PersonService {
         return stationNumberDTO;
 
     }
+
+
+    public List<PersonInfoDTO> personInfoList (String lastname){
+        List<MedicalRecord> medicalRecordList= medicalRecordRepository.medicalRecordList();
+        List<Person> personList = personRepository.personList();
+        List<PersonInfoDTO> personInfoDTOList = new ArrayList<>();
+
+        for (Person person: personList){
+            if (person.getLastName().equals(lastname)){
+                for (MedicalRecord medicalRecord: medicalRecordList){
+                    if (person.getLastName().equals(medicalRecord.getLastName()) && person.getFirstName().equals(medicalRecord.getFirstName())){
+                        Integer age = childAlertService.calculateAge(medicalRecord.getBirthdate());
+
+                        personInfoDTOList.add(new PersonInfoDTO
+                                (person.getLastName(), person.getAddress(),age,person.getEmail(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
+                    }
+                }
+            }
+        }
+       return personInfoDTOList;
+    }
+
+
 
 
     /*public List<String> listAdressPerson(){

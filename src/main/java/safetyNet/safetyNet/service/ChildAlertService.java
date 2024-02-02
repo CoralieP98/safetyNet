@@ -34,7 +34,7 @@ public class ChildAlertService {
         LocalDate curDate = LocalDate.now();
         DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         DateTimeFormatter formatout = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-       LocalDate date = LocalDate.parse(birthdate, formatIn);
+        LocalDate date = LocalDate.parse(birthdate, formatIn);
         date.format(formatout);
 
        return Period.between(date,curDate).getYears();
@@ -70,6 +70,8 @@ public class ChildAlertService {
         }
         return childList;
     }
+
+
 
 }
 

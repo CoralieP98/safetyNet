@@ -23,6 +23,21 @@ public class FireStationRepository {
         return fireStationList;
     }
 
+    public FireStation createFireStation(FireStation fireStation){
+        List<FireStation> fireStationList = dataHandler.getData().getFirestations();
+        fireStationList.add(new FireStation(fireStation.getAddress(),fireStation.getStation()));
+        return fireStation;
+    }
+
+    public FireStation updateFireStation(FireStation fireStation, FireStation newFireStation){
+        fireStation.setStation(newFireStation.getStation());
+        return fireStation;
+    }
+
+    public void deleteFireStation(int index){
+        fireStationList().remove(index);
+    }
+
     /*public List<String> listAddressFireStation(){
         List<FireStation> fireStations = dataHandler.getData().getFirestations();
         List<FireStation> adresses = fireStations.stream().filter(adress -> adress.getAddress() != null).collect(Collectors.toList());

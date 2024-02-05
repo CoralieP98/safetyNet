@@ -1,10 +1,7 @@
 package safetyNet.safetyNet.controler;
 
 import org.springframework.web.bind.annotation.*;
-import safetyNet.safetyNet.service.DTO.FireDTO;
-import safetyNet.safetyNet.service.DTO.PersonByStationDTO;
-import safetyNet.safetyNet.service.DTO.PersonInfoDTO;
-import safetyNet.safetyNet.service.DTO.StationNumberDTO;
+import safetyNet.safetyNet.service.DTO.*;
 import safetyNet.safetyNet.service.PersonService;
 
 import java.util.List;
@@ -56,6 +53,12 @@ public class PersonController {
     @GetMapping("fire")
     public FireDTO fireList (@RequestParam(name="address") String address){
         return personService.fireList(address);
+    }
+
+    @GetMapping("flood/stations")
+    public List<FloodDTO> floodList(@RequestParam(name="stations")List<String> station){
+        return personService.floodList(station);
+
     }
 
     /*@GetMapping("getAddressPerson")

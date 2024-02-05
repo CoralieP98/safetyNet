@@ -122,11 +122,62 @@ public class PersonService {
         List<MedicalRecord> medicalRecordList= medicalRecordRepository.medicalRecordList();
         List<Person> personList = personRepository.personList();
         List<FireStation> fireStationList = fireStationRepository.fireStationList();
-        List<PersonFireDTO> personFireDTOList = new ArrayList<>();
 
 
-        for (Person person : personList){
-            if (person.getAddress().equals(address)){
+//        for (Person person : personList){
+//            if (person.getAddress().equals(address)){
+//                for (MedicalRecord medicalRecord: medicalRecordList){
+//                    if (person.getLastName().equals(medicalRecord.getLastName()) && person.getFirstName().equals(medicalRecord.getFirstName())){
+//                        Integer age = childAlertService.calculateAge(medicalRecord.getBirthdate());
+//                        personFireDTOList.add(new PersonFireDTO
+//                                (person.getLastName(),person.getPhone(),age,
+//                                        medicalRecord.getMedications(),medicalRecord.getAllergies()));
+//                    }
+//                }
+//            }
+//        }
+        List<PersonFireDTO> personFireDTOList=listPersonByAddress(address);
+
+        String station="";
+        for (FireStation fireStation: fireStationList){
+            if (fireStation.getAddress().equals(address)){
+                station = fireStation.getStation();
+            }
+        }
+        return new FireDTO(personFireDTOList,station);
+    }
+
+
+    public List<FloodDTO> floodList(List<String> station){
+        List<FloodDTO> floodDTOList=new ArrayList<>();
+        List<MedicalRecord> medicalRecordList= medicalRecordRepository.medicalRecordList();
+        List<Person> personList = personRepository.personList();
+        List<FireStation> fireStationList = fireStationRepository.fireStationList();
+
+        for (String stations: station){
+//            FloodDTO floodDTO = new FloodDTO();
+            List<PersonByAddressDTO> personByAddressDTOList = new ArrayList<>();
+
+            for (FireStation fireStation:fireStationList){
+                if (stations.equals(fireStation.getStation())){
+                    List<PersonFireDTO> personFireDTOList=listPersonByAddress(fireStation.getAddress());
+                    personByAddressDTOList.add(new PersonByAddressDTO(fireStation.getAddress(),personFireDTOList));
+                }
+            }
+            floodDTOList.add(new FloodDTO(stations, personByAddressDTOList));
+        }
+        return floodDTOList;
+    }
+
+
+
+    public List<PersonFireDTO> listPersonByAddress(String address){
+        List<MedicalRecord> medicalRecordList= medicalRecordRepository.medicalRecordList();
+        List<Person> personList = personRepository.personList();
+        List<PersonFireDTO> personFireDTOList=new ArrayList<>();
+
+        for (Person person:personList){
+            if (address.equals(person.getAddress())){
                 for (MedicalRecord medicalRecord: medicalRecordList){
                     if (person.getLastName().equals(medicalRecord.getLastName()) && person.getFirstName().equals(medicalRecord.getFirstName())){
                         Integer age = childAlertService.calculateAge(medicalRecord.getBirthdate());
@@ -137,17 +188,8 @@ public class PersonService {
                 }
             }
         }
-        String station="";
-        for (FireStation fireStation: fireStationList){
-            if (fireStation.getAddress().equals(address)){
-                station = fireStation.getStation();
-            }
-        }
-        return new FireDTO(personFireDTOList,station);
-
-
+        return personFireDTOList;
     }
-
 
 
 

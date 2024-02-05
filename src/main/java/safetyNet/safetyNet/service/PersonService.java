@@ -193,6 +193,37 @@ public class PersonService {
 
 
 
+    public Person createPerson(Person person){
+        return personRepository.createPerson(person);
+    }
+
+    public List<Person> getPersons(){
+        return  personRepository.personList();
+    }
+
+
+    public Person updatePerson(String firstName,String lastName,Person person){
+        for (Person person1 : personRepository.personList()){
+            if (person1.getFirstName().equals(firstName) && person1.getLastName().equals(lastName)){
+                personRepository.updatePerson(person1, person);
+                break;
+            }
+        }
+        return person;
+    }
+
+    public void deletePerson(String firstName,String lastName){
+        int index=0;
+        for (Person person: personRepository.personList()){
+            if (person.getFirstName().equals(firstName) && person.getLastName().equals(lastName)){
+                personRepository.deletePerson(index);
+                break;
+            }
+            index++;
+        }
+    }
+
+
     /*public List<String> listAdressPerson(){
         return personRepository.listAdressPerson();
     }

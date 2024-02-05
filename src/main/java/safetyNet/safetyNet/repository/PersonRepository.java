@@ -35,6 +35,25 @@ public class PersonRepository {
         return personList;
     }
 
+    public Person createPerson(Person person){
+        List<Person> personList = dataHandler.getData().getPersons();
+        personList.add(new Person(person.getFirstName(),person.getLastName(),person.getAddress(),person.getCity(),person.getZip(),person.getPhone(),person.getEmail()));
+        return person;
+    }
+
+    public Person updatePerson(Person person1, Person person){
+        person1.setAddress(person.getAddress());
+        person1.setCity(person.getCity());
+        person1.setZip(person.getZip());
+        person1.setPhone(person.getPhone());
+        person1.setEmail(person.getEmail());
+        return person1;
+    }
+
+    public void deletePerson(int index){
+        personList().remove(index);
+    }
+
 
     /*public List<String> listAdressPerson(){
 //        List<FireStation> firestations = dataHandler.getData().getFirestations();

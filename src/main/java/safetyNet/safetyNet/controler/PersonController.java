@@ -1,6 +1,7 @@
 package safetyNet.safetyNet.controler;
 
 import org.springframework.web.bind.annotation.*;
+import safetyNet.safetyNet.model.Person;
 import safetyNet.safetyNet.service.DTO.*;
 import safetyNet.safetyNet.service.PersonService;
 
@@ -59,6 +60,26 @@ public class PersonController {
     public List<FloodDTO> floodList(@RequestParam(name="stations")List<String> station){
         return personService.floodList(station);
 
+    }
+
+    @PostMapping("person")
+    public Person createPerson(@RequestBody Person person){
+       return personService.createPerson(person);
+    }
+
+    @GetMapping("person")
+    public List<Person> listPerson(){
+        return personService.getPersons();
+    }
+
+    @PutMapping("update")
+    public Person updatePerson(@RequestParam(name="firstName")String firstName,@RequestParam(name="lastName")String lastName,@RequestBody Person person){
+        return personService.updatePerson(firstName,lastName,person);
+    }
+
+    @DeleteMapping("delete")
+    public void deletePerson(@RequestParam(name="firstName")String firstName,@RequestParam(name="lastName")String lastName){
+        personService.deletePerson(firstName,lastName);
     }
 
     /*@GetMapping("getAddressPerson")

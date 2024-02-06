@@ -25,7 +25,7 @@ public class PersonRepository {
         List<Person> persons = dataHandler.getData().getPersons();
         List<String> emails = new ArrayList<>();
         for (Person person  :persons ){
-          emails.add(  person.getEmail());
+          emails.add(person.getEmail());
         }
         return emails;
     }

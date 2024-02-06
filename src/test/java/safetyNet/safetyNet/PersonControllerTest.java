@@ -20,6 +20,9 @@ public class PersonControllerTest {
     @Autowired
     private PersonController personController;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Test
     public void getEmailTest(){
     List<String> emails= personController.getEmails();;
@@ -53,6 +56,46 @@ public class PersonControllerTest {
     @Test
     public void floodListTest(){
         assertThat(personController.floodList(new ArrayList<String>(){{add("1");add("2");}})).isNotNull();
+    }
+
+    @Test
+    public void createPersonTest(){
+        List<Person> personList= personRepository.personList();
+        int sizeStart = personList.size();
+        Person newPerson= new Person("Mehlissa","Meh","1 rue meh","Mehland","666","06+","meh@email.com");
+
+        personController.createPerson(newPerson);
+        int sizeEnd = personList.size();
+
+        assertThat(sizeEnd).isGreaterThan(sizeStart);
+    }
+
+    @Test
+    public void listPersonTest(){
+        assertThat(personController.listPerson()).isNotNull();
+    }
+
+    @Test
+    public void updatePersonTest(){
+        List<Person> personList=personRepository.personList();
+        String firstName = "John";
+        String lastName = "Boyd";
+
+        Person person = new Person("Mehlissa","Meh","1 rue meh","Mehland","666","06+","meh@email.com");
+        assertThat(personController.updatePerson(firstName,lastName,person).getZip().equals("666"));
+
+    }
+
+    @Test
+    public void deletePersonTest(){
+        List<Person> personList= personRepository.personList();
+        int sizeStart = personList.size();
+
+        personController.deletePerson("John","Boyd");
+
+        int sizeEnd = personList.size();
+
+        assertThat(sizeStart).isGreaterThan(sizeEnd);
     }
 
 

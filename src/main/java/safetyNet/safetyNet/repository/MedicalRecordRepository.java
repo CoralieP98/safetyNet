@@ -28,7 +28,20 @@ public class MedicalRecordRepository {
             birthdates.add(medicalRecord.getBirthdate());
         }
         return birthdates;
+    }
 
+    public MedicalRecord postMedicalRecord(MedicalRecord medicalRecord){
+        medicalRecordList().add(new MedicalRecord(medicalRecord.getFirstName(),medicalRecord.getLastName(),medicalRecord.getBirthdate(),medicalRecord.getMedications(),medicalRecord.getAllergies()));
+        return medicalRecord;
+    }
 
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord, MedicalRecord newmedicalrecord){
+        medicalRecord.setBirthdate(newmedicalrecord.getBirthdate());
+        medicalRecord.setMedications(newmedicalrecord.getMedications());
+        medicalRecord.setAllergies(newmedicalrecord.getAllergies());
+        return medicalRecord;
+    }
+    public void deleteMedicalRecord(int index){
+        medicalRecordList().remove(index);
     }
 }

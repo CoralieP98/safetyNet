@@ -12,6 +12,14 @@ public class MedicalRecord {
     List<String> medications;
     List<String> allergies;
 
+    public MedicalRecord(String firstName, String lastName, String birthdate, List<String> medications, List<String> allergies) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.medications = medications;
+        this.allergies = allergies;
+    }
+
     public MedicalRecord(){}
 
     public String getFirstName() {
